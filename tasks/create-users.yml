@@ -11,7 +11,7 @@
     state: present
     expires: -1
     home: "{{firstuserdir}}"
-    #shell: "{{firstusershell}}"
+    shell: "{{firstusershell}}"
     create_home: yes
     system: no
     append: yes

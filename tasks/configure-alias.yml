@@ -1,4 +1,4 @@
-
+---
 # Aliases
 - name: Get Ubuntu/Debian users's home path
   shell: "egrep '^.*:.*:[1-9][0-9]{3,4}:.*:.*:.*:.*(bash|zsh)$' /etc/passwd | awk -F: '{print $6}'"
@@ -6,7 +6,7 @@
   when: ansible_os_family == 'Debian' and bash_alias_shared
   changed_when: false
   become: yes
-#- debug: var=paths
+# - debug: var=paths
 
 - name: Merge the users path and root/skel to list
   set_fact:
@@ -20,7 +20,7 @@
   set_fact:
     allpaths: "{{ [lookup('env','HOME')] }}"
   when: not bash_alias_shared
-#- debug: var=allpaths
+# - debug: var=allpaths
 
 - name: Install Aliases in {{allpaths | join(',')}}
   template:
