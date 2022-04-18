@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: basic
   author: belgotux
   description: Boilerplate to configure Debian/Ubuntu servers with useful tools and aliases
   license: GPL-3.0-or-later
