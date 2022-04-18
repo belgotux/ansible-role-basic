@@ -1,0 +1,26 @@
+- name: check natif kernel
+  shell: uname -r | grep microsoft
+  register: kernel
+  changed_when: false
+  failed_when: false
+
+- name: set timezone to Europe/Brussels
+  timezone:
+    name: Europe/Brussels
+  when: kernel.rc  # avoid WSL2
+
+# NOT NEED with plugin timezone
+# - name: linklocaltime
+#   ansible.builtin.file:
+#     src: /usr/share/zoneinfo/Europe/Brussels
+#     dest: /etc/localtime
+#     state: link
+
+- name: check NTP active
+  command: timedatectl show --property=NTP --value
+  register: ntp_status
+  changed_when: false
+  when: kernel.rc  # avoid WSL2
+- name: enable ntp
+  command: timedatectl set-ntp true
+  when: kernel.rc and ntp_status.stdout != 'yes'

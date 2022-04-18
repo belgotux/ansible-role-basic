@@ -1,0 +1,20 @@
+galaxy_info:
+  author: belgotux
+  description: Boilerplate to configure Debian/Ubuntu servers with useful tools and aliases
+  license: GPL-3.0-or-later
+
+  min_ansible_version: 2.1
+
+  platforms:
+  - name: Debian
+    versions:
+    - 10
+    - 11
+  - name: Ubuntu
+    versions:
+    - focal
+
+  galaxy_tags: 
+  - tools
+
+dependencies: []

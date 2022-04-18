@@ -1,0 +1,5 @@
+if [ ! -z "$(ls -A {{bash_alias_dir}}/.bash_aliases.d/)" ]; then
+    for file in {{bash_alias_dir}}/.bash_aliases.d/*.aliases ; do
+        source "$file"
+    done
+fi

@@ -1,0 +1,30 @@
+---
+- name: Copy local public keys ~/.ssh/id_rsa.pub and install sudo for Debian/Ubuntu
+  hosts: "{{ myhost | default('specified a myhost variable') }}"
+  remote_user: "{{user}}"
+  become: yes
+  become_method: "{{become_meth | default('su')}}"
+
+  tasks:
+    - name: install sudo
+      apt:
+        name: sudo
+        state: latest
+        update_cache: yes
+      when: ansible_facts['distribution'] == "Debian"
+    - name: add {{user}} to sudo group
+      user:
+        name: "{{user}}"
+        groups: sudo 
+        append: yes
+      when: ansible_facts['distribution'] == "Debian"
+    - name: copy local public key to user {{user}}
+      authorized_key:
+        user: "{{user}}"
+        state: present
+        key: "{{lookup('file','~/.ssh/id_rsa.pub')}}"
+    - name: copy local public key to user root
+      authorized_key:
+        user: root
+        state: present
+        key: "{{lookup('file','~/.ssh/id_rsa.pub')}}"

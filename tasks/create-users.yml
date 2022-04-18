@@ -1,0 +1,23 @@
+- name: group "{{firstusergroup}}"
+  group:
+    name: "{{firstusergroup}}"
+    state: present
+  when: firstusergroup is defined
+- name: create user {{firstuser}}
+  user:
+    name: "{{ firstuser}}"
+    group: "{{firstusergroup}}"
+    groups: sudo,users
+    state: present
+    expires: -1
+    home: "{{firstuserdir}}"
+    #shell: "{{firstusershell}}"
+    create_home: yes
+    system: no
+    append: yes
+    password: $6$.kIGB4.ccDPWEovY$e3mBxE6SOrkKGhfQzbljCH9HofCSi/1vkyNE7YK/0b1dz0PboQ9MukWFHTi5Bc.uC.zPLyh4CCJdPQV0uzwYG.
+    generate_ssh_key: yes
+    ssh_key_type: rsa
+    ssh_key_bits: 4096
+    ssh_key_comment: "{{firstuser}} on {{ansible_hostname}}"
+  when: firstuser is defined and firstusergroup is defined 

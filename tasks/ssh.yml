@@ -1,0 +1,21 @@
+- name: verify that openssh-server is installed
+  command: dpkg --verify openssh-server
+  register: sshd
+  changed_when: false
+  failed_when: false
+  when: ansible_os_family == 'Debian'
+
+- name: copy public keys to user root
+  authorized_key:
+    user: root
+    state: present
+    key: "{{lookup('file',item)}}"
+  loop: "{{public_keys}}"
+  when: public_keys is defined and sshd.rc == 0
+- name: Adjust prohibit-password root setting in /etc/ssh/sshd_config
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PermitRootLogin"
+    line: "PermitRootLogin prohibit-password"
+  notify: restart sshd
+  when: sshd.rc == 0

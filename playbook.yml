@@ -1,0 +1,11 @@
+---
+- hosts: [homeservers,vps]
+  remote_user: root
+  roles:
+    - name: basic
+      vars: 
+        firstuser: belgotux
+        firstusergroup: belgotux
+        firstusershell: "/bin/zsh"
+        firstuserdir: "{{('/home/'+ firstuser)}}"
+        bash_alias_shared: yes

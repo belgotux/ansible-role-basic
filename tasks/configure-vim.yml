@@ -1,0 +1,25 @@
+- name: Config vimrc.local
+  copy:
+    content: |
+      filetype indent off
+      syntax on
+      set mouse=
+      set ttymouse=
+      set softtabstop=2
+      " Use case insensitive search, except when using capital letters
+      set ignorecase
+      set smartcase
+      " Stop certain movements from always going to the first character of a line.
+      " While this behaviour deviates from that of Vi, it does what most users
+      " coming from other editors would expect.
+      set nostartofline
+      " Use visual bell instead of beeping when doing something wrong
+      set visualbell
+      " Display line numbers on the left
+      set number
+      set cursorline
+
+    dest: "/etc/vim/vimrc.local"
+    owner: root
+    group: root
+    mode: '0644'

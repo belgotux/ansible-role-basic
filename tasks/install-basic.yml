@@ -1,0 +1,53 @@
+# usage ansible-playbook playbooks/install-basic.yml -e 'bm=1'
+- name: Install basic package
+  apt:
+    pkg:
+      - acl
+      - dnsutils
+      - nano
+      - vim
+      - jq
+      - iptraf-ng
+      - net-tools
+      - traceroute
+      - tcptraceroute
+      - curl
+      - fail2ban
+      - nmap
+      - p7zip
+      - pbzip2
+      - pigz
+      - pixz
+      - tcpdump
+      - tree
+      - bsd-mailx
+      - psmisc
+      - screen
+      - sudo
+      - rsync
+      - less
+      - bat
+    state: latest
+    update_cache: yes
+
+- name: Install BM
+  apt:
+    pkg:
+      - fdisk
+      - cpio
+      - fsarchiver
+      - hdparm
+      - lm-sensors
+      - iotop
+      - wakeonlan
+    state: latest
+  when: bm is defined
+
+
+- name: generate root SSH key "{{ssh_key_filename}}"
+  openssh_keypair:
+    path: "/root/.ssh/{{ssh_key_filename}}"
+    type: rsa
+    size: 4096
+    state: present
+    force: no

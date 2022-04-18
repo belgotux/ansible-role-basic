@@ -1,0 +1,20 @@
+---
+# Install bare metal tools (optional)
+# bm: yes
+
+# SSH key generated for root (optional)
+#ssh_key_filename: id_rsa
+
+#public keys files to add to user root (optional)
+# public_keys:
+#   - xxx.pub
+
+# Default 1st sudoer user (optional)
+#firstuser:
+#firstusergroup:
+#firstuserdir: "{{('/home/'+ firstuser)}}"
+#firstusershell: "/bin/bash"
+
+#Installed alias in /usr/share (only with root user of become) (optional)
+#bash_alias_dir_share: /usr/share
+#bash_alias_shared: yes
