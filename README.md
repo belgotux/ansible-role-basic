@@ -6,7 +6,7 @@ Boilerplate to configure Debian/Ubuntu servers with useful tools and aliases.
 Requirements
 ------------
 
-- Ubuntu/Debian OS
+- Ubuntu / Debian OS / WSL
 - SSH key installed on the servers (root or a user with become)
 
 The playbooks [`playbook-init-server.yml`](playbook-init-server.yml) can be use first to init a new server with public keys and install sudo for Debian. Only need to execute once : 
