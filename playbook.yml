@@ -1,5 +1,5 @@
 ---
-- hosts: [homeservers,vps]
+- hosts: [homeservers, vps]
   remote_user: root
   roles:
     - name: basic
