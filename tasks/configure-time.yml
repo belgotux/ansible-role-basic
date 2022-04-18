@@ -4,9 +4,9 @@
   changed_when: false
   failed_when: false
 
-- name: set timezone to ${{timezone}}
+- name: set timezone to {{timezone}}
   timezone:
-    name: ${{timezone}}
+    name: "{{timezone}}"
   when: kernel.rc  # avoid WSL2
 
 # NOT NEED with plugin timezone

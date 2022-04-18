@@ -14,6 +14,8 @@ The playbooks [`playbook-init-server.yml`](playbook-init-server.yml) can be use 
 ansible-playbook -i inventories/prod roles/basic/playbook-init-server.yml -e 'myhost=node9 user=devops become_meth=sudo' -kK
 ``` 
 
+- Copy [`basic.aliases.example`](files/basic.aliases.example) to `basic.aliases` to add your aliaseses
+
 Role Variables
 --------------
 

@@ -1,24 +1,12 @@
 ---
 - import_tasks: install-basic.yml
+  become: yes
 - import_tasks: create-users.yml
+  become: yes
 - import_tasks: configure-alias.yml
 - import_tasks: configure-vim.yml
+  become: yes
 - import_tasks: ssh.yml
+  become: yes
 - import_tasks: configure-time.yml
-
-
-# TODO shared zsh plutot que ca pour les users actuels et pas futurs
-# - name: Get Ubuntu/Debian users
-#   shell: "egrep '^.*:.*:[1-9][0-9]{3,4}:.*:.*:.*:.*(bash|zsh)$' /etc/passwd | awk -F: '{print $1}'"
-#   register: zsh_users
-#   #when: ansible_facts['distribution'] == "Debian" or ansible_facts['distribution'] == "Ubuntu"
-#   when: ansible_os_family == 'Debian'
-#   changed_when: false
-# - name: ZSH ROLE
-#   include_role:
-#     name: viasite-ansible.zsh
-#   vars:
-#     zsh_user: "{{zsh_user_item}}"
-#   loop: "{{ ['root'] + zsh_users.stdout.splitlines()| list }}"
-#   loop_control:
-#     loop_var: zsh_user_item
+  become: yes

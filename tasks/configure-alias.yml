@@ -3,8 +3,9 @@
 - name: Get Ubuntu/Debian users's home path
   shell: "egrep '^.*:.*:[1-9][0-9]{3,4}:.*:.*:.*:.*(bash|zsh)$' /etc/passwd | awk -F: '{print $6}'"
   register: paths
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian' and bash_alias_shared
   changed_when: false
+  become: yes
 #- debug: var=paths
 
 - name: Merge the users path and root/skel to list
@@ -15,7 +16,7 @@
   set_fact:
     allpaths: "{{ ['/root','/etc/skel']}}"
   when: bash_alias_shared and paths is defined and paths.stdout == ""
-- name: Take only user directory {{ [lookup('env','HOME')] }}
+- name: Take only user directory {{ lookup('env','HOME') }}
   set_fact:
     allpaths: "{{ [lookup('env','HOME')] }}"
   when: not bash_alias_shared
@@ -25,27 +26,29 @@
   template:
     src: bash_aliases.j2
     dest: "{{item}}/.bash_aliases"
-    owner: root
-    group: root
+    # owner: root
+    # group: root
     mode: '0644'
   loop: "{{allpaths}}"
   when: allpaths is defined
+  become: "{% if bash_alias_shared %}yes{% else %}no{% endif %}"
 
 - name: Create Aliases Directory in {{bash_alias_dir}}
   file:
     dest: "{{bash_alias_dir}}/.bash_aliases.d"
-    owner: root
-    group: root
+    # owner: root
+    # group: root
     mode: '0755'
     state: directory
   when: bash_alias_dir is defined
+  become: "{% if bash_alias_shared %}yes{% else %}no{% endif %}"
 
 - name: Install Aliases Files basic.aliases
   copy:
     src: basic.aliases
     dest: "{{bash_alias_dir}}/.bash_aliases.d/basic.aliases"
-    owner: root
-    group: root
+    # owner: root
+    # group: root
     mode: '0644'
   when: bash_alias_dir is defined
-
+  become: "{% if bash_alias_shared %}yes{% else %}no{% endif %}"
