@@ -26,7 +26,8 @@ Role Variables
 - `firstuser` defined 1st sudoer user
 - `firstusergroup` defined 1st sudoer user's group
 - `firstuserdir` directory of the 1st sudoer user
-- `firstusershell` the shell of the 1st dusoer user
+- `firstusershell` the shell of the 1st sudoer user
+- `firstuserpasswd` the hash of the password
 
 - `bash_alias_shared` enable shared alias (Installed alias in /usr/share only **with root user ONLY** via `remote_user` or `become` in your playbook) (default no to install only for `remote_user` in his homepath)
 - `bash_alias_dir_share`: (default /usr/share)
@@ -43,6 +44,7 @@ Example Playbook
         firstusergroup: belgotux
         firstusershell: "/bin/zsh"
         firstuserdir: "{{('/home/'+ firstuser)}}"
+        firstuserpasswd: $6$xxx
         bash_alias_shared: yes
 ```
 
