@@ -1,5 +1,12 @@
-if [ ! -z "$(ls -A {{bash_alias_dir}}/.bash_aliases.d/)" ]; then
-    for file in {{bash_alias_dir}}/.bash_aliases.d/*.aliases ; do
+{% if bash_alias_shared %}
+if [ ! -z "$(ls -A {{bash_alias_dir_share}}/.bash_aliases.d/)" ]; then
+    for file in {{bash_alias_dir_share}}/.bash_aliases.d/*.aliases ; do
+        source "$file"
+    done
+fi
+{% endif %}
+if [ ! -z "$(ls -A $HOME/.bash_aliases.d/)" ]; then
+    for file in $HOME/.bash_aliases.d/*.aliases ; do
         source "$file"
     done
 fi

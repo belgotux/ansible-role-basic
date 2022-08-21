@@ -7,7 +7,7 @@
   user:
     name: "{{ firstuser}}"
     group: "{{firstusergroup}}"
-    groups: sudo,users
+    groups: sudo,users,staff,adm
     state: present
     expires: -1
     home: "{{firstuserdir}}"
@@ -15,9 +15,16 @@
     create_home: yes
     system: no
     append: yes
-    password: $6$.kIGB4.ccDPWEovY$e3mBxE6SOrkKGhfQzbljCH9HofCSi/1vkyNE7YK/0b1dz0PboQ9MukWFHTi5Bc.uC.zPLyh4CCJdPQV0uzwYG.
+    password: "{{firstuserpasswd}}"
     generate_ssh_key: yes
     ssh_key_type: rsa
     ssh_key_bits: 4096
     ssh_key_comment: "{{firstuser}} on {{ansible_hostname}}"
   when: firstuser is defined and firstusergroup is defined 
+- name: copy public keys to user root
+  authorized_key:
+    user: root
+    state: present
+    key: "{{lookup('file',item)}}"
+  loop: "{{public_keys}}"
+  when: public_keys is defined

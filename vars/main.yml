@@ -14,9 +14,12 @@
 # firstusergroup:
 # firstuserdir: "{{('/home/'+ firstuser)}}"
 # firstusershell: "/bin/bash"
+# firstuserpasswd:
 
 # Installed alias in /usr/share (only with root user of become) (optional)
 # bash_alias_dir_share: /usr/share
 # bash_alias_shared: yes
 
+# Install custom vim in "shared mode" into /etc/vim/vimrc.local or local user
+# vim_config_shared: yes
 # timezone: Europe/Brussels

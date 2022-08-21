@@ -1,0 +1,21 @@
+- name: create root SSH dir /root/.ssh
+  file:
+    path: "/root/.ssh"
+    state: directory
+    owner: root
+    group: root
+    mode: 0775
+
+- name: generate root SSH key "{{ssh_key_filename}}"
+  openssh_keypair:
+    path: "/root/.ssh/{{ssh_key_filename}}"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+- name: Adjust prohibit-password root setting in /etc/ssh/sshd_config
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PermitRootLogin"
+    line: "PermitRootLogin prohibit-password"
+  notify: restart sshd

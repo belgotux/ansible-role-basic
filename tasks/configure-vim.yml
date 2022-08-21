@@ -1,4 +1,4 @@
-- name: Config vimrc.local
+- name: "Config {% if vim_config_shared %}vimrc.local{% else %}.vimrc{% endif %}"
   copy:
     content: |
       filetype indent off
@@ -19,7 +19,4 @@
       set number
       set cursorline
 
-    dest: "/etc/vim/vimrc.local"
-    owner: root
-    group: root
-    mode: '0644'
+    dest: "{% if vim_config_shared %}/etc/vim/vimrc.local{% else %}~/.vimrc{% endif %}"

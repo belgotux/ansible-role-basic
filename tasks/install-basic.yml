@@ -26,9 +26,18 @@
       - sudo
       - rsync
       - less
+      - git
+    state: latest
+    update_cache: yes
+
+- name: Install package for Debian >=11 or Ubuntu >= 20.04
+  apt:
+    pkg:
       - bat
     state: latest
     update_cache: yes
+  when: (ansible_distribution == "Debian" and ansible_distribution_major_version >= "11")
+    or (ansible_distribution == "Ubuntu" and ansible_distribution_major_version >= "20")
 
 - name: Install BM
   apt:
@@ -41,13 +50,4 @@
       - iotop
       - wakeonlan
     state: latest
-  when: bm is defined
-
-
-- name: generate root SSH key "{{ssh_key_filename}}"
-  openssh_keypair:
-    path: "/root/.ssh/{{ssh_key_filename}}"
-    type: rsa
-    size: 4096
-    state: present
-    force: no
+  when: bm

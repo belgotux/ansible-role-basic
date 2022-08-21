@@ -1,10 +1,16 @@
 ---
+# bare metal server
+bm: no
 # SSH key file path to generate for root
 ssh_key_filename: id_rsa
 
+firstusershell: /bin/bash
+firstuserpasswd: !
+
 # Installed alias in /usr/share (only with root remote_user)
 bash_alias_dir_share: /usr/share
-bash_alias_shared: no
+basic_shared: no
+vim_config_shared: "{{basic_shared}}"
+bash_alias_shared: "{{basic_shared}}"
 bash_alias_dir: "{% if bash_alias_shared %}{{bash_alias_dir_share}}{% else %}{{ lookup('env','HOME') }}{% endif %}"
-
 timezone: "Europe/Brussels"

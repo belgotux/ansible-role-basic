@@ -1,5 +1,7 @@
 alias ll='ls $LS_OPTIONS -l'
 alias update='sudo -- sh -c "apt update && apt -y upgrade && apt -y --purge autoremove && sudo apt -y clean"'
+alias du1='du -h --max-depth=1'
+alias du2='du -h --max-depth=2'
 
 export HISTFILESIZE=2000
 export HISTTIMEFORMAT="[%F %T] "

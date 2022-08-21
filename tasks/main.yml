@@ -1,12 +1,28 @@
 ---
 - import_tasks: install-basic.yml
-  become: yes
+  become: true
+  tags: [install]
 - import_tasks: create-users.yml
-  become: yes
+  become: true
+  when: basic_shared
+  tags: [install]
 - import_tasks: configure-alias.yml
+  become: true
+  when: bash_alias_shared
+- import_tasks: configure-alias.yml
+  when: not bash_alias_shared
+  tags: [configure]
 - import_tasks: configure-vim.yml
-  become: yes
-- import_tasks: ssh.yml
-  become: yes
+  tags: [configure]
+  become: true
+  when: vim_config_shared
+- import_tasks: configure-vim.yml
+  tags: [configure]
+  when: not vim_config_shared
+- import_tasks: configure-root.yml
+  become: true
+  when: basic_shared
+  tags: [install]
 - import_tasks: configure-time.yml
-  become: yes
+  become: true
+  tags: [configure]
