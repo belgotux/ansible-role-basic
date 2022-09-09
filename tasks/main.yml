@@ -26,3 +26,6 @@
 - import_tasks: configure-time.yml
   become: true
   tags: [configure]
+- import_tasks: unattended-upgrades.yml
+  become: true
+  tags: [configure]

@@ -23,3 +23,6 @@
 # Install custom vim in "shared mode" into /etc/vim/vimrc.local or local user
 # vim_config_shared: yes
 # timezone: Europe/Brussels
+
+# Configure inattended-upgrades
+# auto_upgrade: yes
