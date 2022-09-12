@@ -1,0 +1,25 @@
+- name: "staff authorized for {{staff_directories|join(',')}}"
+  file:
+    dest: "{{item}}"
+    state: directory
+    mode: 02775 #sticky bit
+    group: staff
+    owner: root
+  loop: "{{staff_directories}}"
+  when: staff_directories is defined
+
+- name: merge common and local scripts
+  set_fact:
+    custom_scripts_common: "{{custom_scripts_common + custom_scripts_local}}"
+  when: custom_scripts_local is defined
+
+- name: Install scripts
+  copy:
+    src: "{{item}}"
+    dest: "/usr/local/bin/{{item | basename}}"
+    mode: 0775
+  loop: "{{custom_scripts_common}}"
+  
+
+
+  #TODO idem src git?

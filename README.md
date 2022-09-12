@@ -31,7 +31,12 @@ Role Variables
 
 - `bash_alias_shared` enable shared alias (Installed alias in /usr/share only **with root user ONLY** via `remote_user` or `become` in your playbook) (default no to install only for `remote_user` in his homepath)
 - `bash_alias_dir_share` (default /usr/share)
+
+### optional
 - `auto_upgrade: ` Configure inattended-upgrades (default false)
+- `staff_directories` list of directory that can be modified by staff group
+- `custom_scripts_common` list of local scripts to put to /usr/local/bin (to use in groups)
+- `custom_scripts_local` list of additionnal scripts to put to /usr/local/bin (to use in hosts)
 
 Example Playbook
 ----------------
