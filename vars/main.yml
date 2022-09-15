@@ -6,7 +6,11 @@
 # ssh_key_filename: id_rsa
 
 # public keys files to add to user root (optional)
-# public_keys:
+# root_public_keys:
+#   - xxx.pub
+
+# public keys files to add to user firstuser (optional)
+# firstuser_public_keys:
 #   - xxx.pub
 
 # Default 1st sudoer user (optional)

@@ -21,10 +21,17 @@
     ssh_key_bits: 4096
     ssh_key_comment: "{{firstuser}} on {{ansible_hostname}}"
   when: firstuser is defined and firstusergroup is defined 
+- name: copy public keys to user {{firstuser}}
+  authorized_key:
+    user: "{{firstuser}}"
+    state: present
+    key: "{{lookup('file',item)}}"
+  loop: "{{firstuser_public_keys}}"
+  when: firstuser_public_keys is defined
 - name: copy public keys to user root
   authorized_key:
     user: root
     state: present
     key: "{{lookup('file',item)}}"
-  loop: "{{public_keys}}"
-  when: public_keys is defined
+  loop: "{{root_public_keys}}"
+  when: root_public_keys is defined

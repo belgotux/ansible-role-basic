@@ -21,13 +21,14 @@ Role Variables
 
 - `bm` Install bare metal tools if defined
 - `ssh_key_filename` SSH key generated for root (default id_rsa)
-- `public_keys` list of public key files to copy from `files` folder
 
 - `firstuser` defined 1st sudoer user
 - `firstusergroup` defined 1st sudoer user's group
 - `firstuserdir` directory of the 1st sudoer user
 - `firstusershell` the shell of the 1st sudoer user
 - `firstuserpasswd` the hash of the password
+- `firstuser_public_keys` list of public key files to copy from `files` folder to firstuser
+- `root_public_keys` list of public key files to copy from `files` folder to root (can be `firstuser_public_keys`)
 
 - `bash_alias_shared` enable shared alias (Installed alias in /usr/share only **with root user ONLY** via `remote_user` or `become` in your playbook) (default no to install only for `remote_user` in his homepath)
 - `bash_alias_dir_share` (default /usr/share)

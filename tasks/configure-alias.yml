@@ -5,7 +5,7 @@
   register: paths
   when: ansible_os_family == 'Debian' and bash_alias_shared
   changed_when: false
-  become: yes
+  become: true
 # - debug: var=paths
 
 - name: Get Ubuntu/Debian users
@@ -39,7 +39,7 @@
     mode: '0644'
   loop: "{{allpaths}}"
   when: allpaths is defined
-  become: "{% if bash_alias_shared %}yes{% else %}no{% endif %}"
+  become: "{% if bash_alias_shared %}true{% else %}false{% endif %}"
 
 - name: Create Aliases directory in {{bash_alias_dir}}
   file:
@@ -47,7 +47,7 @@
     mode: '0755'
     state: directory
   when: bash_alias_dir is defined
-  become: "{% if bash_alias_shared %}yes{% else %}no{% endif %}"
+  become: "{% if bash_alias_shared %}true{% else %}false{% endif %}"
 
 - name: Create Aliases directory in users directory (shared mode)
   file:
@@ -59,7 +59,7 @@
   loop_control:
     index_var: id
   when: bash_alias_shared is defined
-  become: yes
+  become: true
 
 - name: Install Aliases Files basic.aliases
   copy:
@@ -67,5 +67,5 @@
     dest: "{{bash_alias_dir}}/.bash_aliases.d/basic.aliases"
     mode: '0644'
   when: bash_alias_dir is defined
-  become: "{% if bash_alias_shared %}yes{% else %}no{% endif %}"
+  become: "{% if bash_alias_shared %}true{% else %}false{% endif %}"
 
