@@ -10,12 +10,12 @@
 
 - name: Get Ubuntu/Debian users
   shell: "egrep '^.*:.*:[1-9][0-9]{3,4}:.*:.*:.*:.*(bash|zsh)$' /etc/passwd | awk -F: '{print $1}'"
-  register: users
+  register: alias_custom_users
   when: ansible_os_family == 'Debian' and bash_alias_shared and paths is defined and paths.stdout != ""
   changed_when: false
 - name: Format user list
   set_fact:
-    list_users: "{{['root','root'] + users.stdout.splitlines()| list}}"
+    basic_list_users: "{{['root','root'] + alias_custom_users.stdout.splitlines()| list}}"
   when: ansible_os_family == 'Debian' and bash_alias_shared and paths is defined and paths.stdout != ""
 
 - name: Merge the users path and root/skel to list
@@ -52,7 +52,7 @@
 - name: Create Aliases directory in users directory (shared mode)
   file:
     dest: "{{item}}/.bash_aliases.d"
-    owner: "{{list_users[id]| default('root')}}"
+    owner: "{{basic_list_users[id]| default('root')}}"
     mode: '0755'
     state: directory
   loop: "{{allpaths}}"

@@ -5,9 +5,18 @@
     - role: basic
       tags: [install,users,configure]
       vars: 
-        firstuser: belgotux
-        firstusergroup: belgotux
-        firstusershell: "/bin/zsh"
-        firstuserdir: "{{('/home/'+ firstuser)}}"
+        list_users:
+          - name: belgotux
+            primarygroup: belgotux
+            groups: sudo,users,staff,adm
+            shell: "/bin/zsh"
+            passwd: $6$xxxx
+            pubkeys:
+              - xxx.pub
+              - yyy.pub
+        # firstuser: belgotux
+        # firstusergroup: belgotux
+        # firstusershell: "/bin/zsh"
+        # firstuserdir: "{{('/home/'+ firstuser)}}"
         bash_alias_shared: yes
         vim_config_shared: yes

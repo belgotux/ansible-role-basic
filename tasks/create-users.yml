@@ -1,33 +1,33 @@
-- name: group "{{firstusergroup}}"
-  group:
-    name: "{{firstusergroup}}"
-    state: present
-  when: firstusergroup is defined
-- name: create user {{firstuser}}
-  user:
-    name: "{{ firstuser}}"
-    group: "{{firstusergroup}}"
-    groups: sudo,users,staff,adm
-    state: present
-    expires: -1
-    home: "{{firstuserdir}}"
-    shell: "{{firstusershell}}"
-    create_home: yes
-    system: no
-    append: yes
-    password: "{{firstuserpasswd}}"
-    generate_ssh_key: yes
-    ssh_key_type: rsa
-    ssh_key_bits: 4096
-    ssh_key_comment: "{{firstuser}} on {{ansible_hostname}}"
-  when: firstuser is defined and firstusergroup is defined 
-- name: copy public keys to user {{firstuser}}
-  authorized_key:
-    user: "{{firstuser}}"
-    state: present
-    key: "{{lookup('file',item)}}"
-  loop: "{{firstuser_public_keys}}"
-  when: firstuser_public_keys is defined
+# - name: group "{{firstusergroup}}"
+#   group:
+#     name: "{{firstusergroup}}"
+#     state: present
+#   when: firstusergroup is defined
+# - name: create user {{firstuser}}
+#   user:
+#     name: "{{ firstuser}}"
+#     group: "{{firstusergroup}}"
+#     groups: sudo,users,staff,adm
+#     state: present
+#     expires: -1
+#     home: "{{firstuserdir}}"
+#     shell: "{{firstusershell}}"
+#     create_home: yes
+#     system: no
+#     append: yes
+#     password: "{{firstuserpasswd}}"
+#     generate_ssh_key: yes
+#     ssh_key_type: rsa
+#     ssh_key_bits: 4096
+#     ssh_key_comment: "{{firstuser}} on {{ansible_hostname}}"
+#   when: firstuser is defined and firstusergroup is defined 
+# - name: copy public keys to user {{firstuser}}
+#   authorized_key:
+#     user: "{{firstuser}}"
+#     state: present
+#     key: "{{lookup('file',item)}}"
+#   loop: "{{firstuser_public_keys}}"
+#   when: firstuser_public_keys is defined
 - name: copy public keys to user root
   authorized_key:
     user: root
@@ -35,3 +35,31 @@
     key: "{{lookup('file',item)}}"
   loop: "{{root_public_keys}}"
   when: root_public_keys is defined
+
+
+- name: create users 
+  user:
+    name: "{{item.name}}"
+    group: "{{omit if item.primarygroup is not defined or item.primarygroup}}"
+    groups: "{{omit if item.groups is not defined or item.groups}}"
+    state: present
+    expires: -1
+    home: "{{item.home|default(('/home/'+ item.name))}}"
+    shell: "{{omit if item.shell is not defined or item.shell}}"
+    create_home: "{{item.create_home|default(true)}}"
+    system: "{{item.system|default(false)}}"
+    append: "{{omit if item.groups is not defined or true}}"
+    password: "{{item.passwd}}"
+    generate_ssh_key: "{{item.generate_ssh_key|default(false)}}"
+    ssh_key_type: rsa
+    ssh_key_bits: 4096
+    ssh_key_comment: "{{item.name}} on {{ansible_hostname}}"
+  loop: "{{list_users}}"
+
+- name: copy public keys to users
+  authorized_key:
+    user: "{{item.name}}"
+    state: present
+    key: "{{lookup('file',item.pubkeys)}}"
+  loop: "{{[] if item.pubkeys is not defined or list_users|subelements('pubkeys')}}"
+  when: item.pubkeys is defined

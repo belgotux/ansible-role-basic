@@ -4,8 +4,8 @@ bm: no
 # SSH key file path to generate for root
 ssh_key_filename: id_rsa
 
-firstusershell: /bin/bash
-firstuserpasswd: !
+# firstusershell: /bin/bash
+# firstuserpasswd: !
 
 # Installed alias in /usr/share (only with root remote_user)
 bash_alias_dir_share: /usr/share

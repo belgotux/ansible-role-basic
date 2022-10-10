@@ -9,16 +9,15 @@
 # root_public_keys:
 #   - xxx.pub
 
-# public keys files to add to user firstuser (optional)
-# firstuser_public_keys:
-#   - xxx.pub
-
-# Default 1st sudoer user (optional)
-# firstuser:
-# firstusergroup:
-# firstuserdir: "{{('/home/'+ firstuser)}}"
-# firstusershell: "/bin/bash"
-# firstuserpasswd:
+# list_users:
+#   - name: belgotux
+#     primarygroup: belgotux
+#     groups: sudo,users,staff,adm
+#     shell: "/bin/zsh"
+#     passwd: $6$xxxx
+#     pubkeys:
+#       - xxx.pub
+#       - yyy.pub
 
 # Installed alias in /usr/share (only with root user of become) (optional)
 # bash_alias_dir_share: /usr/share
