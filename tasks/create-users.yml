@@ -45,7 +45,7 @@
     state: present
     expires: -1
     home: "{{item.home|default(('/home/'+ item.name))}}"
-    shell: "{{omit if item.shell is not defined or item.shell}}"
+    shell: "{{item.shell|default('/bin/bash')}}"
     create_home: "{{item.create_home|default(true)}}"
     system: "{{item.system|default(false)}}"
     append: "{{omit if item.groups is not defined or true}}"
