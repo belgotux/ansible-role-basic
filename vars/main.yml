@@ -9,7 +9,7 @@
 # root_public_keys:
 #   - xxx.pub
 
-# list_users:
+# basic_list_users:
 #   - name: belgotux
 #     primarygroup: belgotux
 #     groups: sudo,users,staff,adm

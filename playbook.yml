@@ -5,7 +5,7 @@
     - role: basic
       tags: [install,users,configure]
       vars: 
-        list_users:
+        basic_list_users:
           - name: belgotux
             primarygroup: belgotux
             groups: sudo,users,staff,adm

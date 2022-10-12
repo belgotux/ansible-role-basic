@@ -22,7 +22,7 @@ Role Variables
 - `bm` Install bare metal tools if defined
 - `ssh_key_filename` SSH key generated for root (default id_rsa)
 
-- `list_users` list of users and ssh keys :
+- `basic_list_users` list of users and ssh keys :
   - `name` username
   - `primarygroup` user's default group
   - `groups` users's other groups
@@ -54,7 +54,7 @@ Example Playbook
   roles:
     - name: basic
       vars: 
-        list_users:
+        basic_list_users:
           - name: belgotux
             primarygroup: belgotux
             groups: sudo,users,staff,adm
