@@ -49,7 +49,7 @@
     create_home: "{{item.create_home|default(true)}}"
     system: "{{item.system|default(false)}}"
     append: "{{omit if item.groups is not defined or true}}"
-    password: "{{item.passwd}}"
+    password: "{{omit if item.passwd is not defined or item.passwd}}"
     generate_ssh_key: "{{item.generate_ssh_key|default(false)}}"
     ssh_key_type: rsa
     ssh_key_bits: 4096
