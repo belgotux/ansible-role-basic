@@ -1,39 +1,13 @@
 # usage ansible-playbook playbooks/install-basic.yml -e 'bm=1'
 - name: Install basic package
   apt:
-    pkg:
-      - acl
-      - dnsutils
-      - nano
-      - vim
-      - jq
-      - iptraf-ng
-      - net-tools
-      - traceroute
-      - tcptraceroute
-      - curl
-      - fail2ban
-      - nmap
-      - p7zip
-      - pbzip2
-      - pigz
-      - pixz
-      - tcpdump
-      - tree
-      - bsd-mailx
-      - psmisc
-      - screen
-      - sudo
-      - rsync
-      - less
-      - git
+    pkg: "{{basic_packages}}"
     state: latest
     update_cache: yes
 
 - name: Install package for Debian >=11 or Ubuntu >= 20.04
   apt:
-    pkg:
-      - bat
+    pkg: "{{basic_packages_min_bullseye}}"
     state: latest
     update_cache: yes
   when: (ansible_distribution == "Debian" and ansible_distribution_major_version >= "11")
@@ -41,13 +15,6 @@
 
 - name: Install BM
   apt:
-    pkg:
-      - fdisk
-      - cpio
-      - fsarchiver
-      - hdparm
-      - lm-sensors
-      - iotop
-      - wakeonlan
+    pkg: "{{basic_packages_bm}}"
     state: latest
   when: bm

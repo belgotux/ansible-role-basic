@@ -14,3 +14,46 @@ vim_config_shared: "{{basic_shared}}"
 bash_alias_shared: "{{basic_shared}}"
 bash_alias_dir: "{% if bash_alias_shared %}{{bash_alias_dir_share}}{% else %}{{ lookup('env','HOME') }}{% endif %}"
 timezone: "Europe/Brussels"
+
+basic_packages_default: 
+  - acl
+  - dnsutils
+  - nano
+  - vim
+  - jq
+  - iptraf-ng
+  - net-tools
+  - traceroute
+  - tcptraceroute
+  - curl
+  - fail2ban
+  - nmap
+  - p7zip
+  - pbzip2
+  - pigz
+  - pixz
+  - tcpdump
+  - tree
+  - bsd-mailx
+  - psmisc
+  - screen
+  - sudo
+  - rsync
+  - less
+  - git
+
+basic_packages_extra: []
+
+basic_packages: '{{ basic_packages_default + basic_packages_extra }}'
+
+basic_packages_min_bullseye:
+- bat
+
+basic_packages_bm:
+- fdisk
+- cpio
+- fsarchiver
+- hdparm
+- lm-sensors
+- iotop
+- wakeonlan
