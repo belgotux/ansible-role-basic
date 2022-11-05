@@ -46,6 +46,9 @@ basic_packages_extra: []
 
 basic_packages: '{{ basic_packages_default + basic_packages_extra }}'
 
+basic_list_users_extra: []
+basic_list_users_all: '{{ basic_list_users + basic_list_users_extra }}'
+
 basic_packages_min_bullseye:
 - bat
 
@@ -57,3 +60,4 @@ basic_packages_bm:
 - lm-sensors
 - iotop
 - wakeonlan
+- powertop

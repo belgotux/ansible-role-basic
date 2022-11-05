@@ -54,12 +54,12 @@
     ssh_key_type: rsa
     ssh_key_bits: 4096
     ssh_key_comment: "{{item.name}} on {{ansible_hostname}}"
-  loop: "{{basic_list_users}}"
+  loop: "{{basic_list_users_all}}"
 
 - name: copy public keys to users
   authorized_key:
     user: "{{item.name}}"
     state: present
     key: "{{lookup('file',item.pubkeys)}}"
-  loop: "{{[] if item.pubkeys is not defined or basic_list_users|subelements('pubkeys')}}"
+  loop: "{{[] if item.pubkeys is not defined or basic_list_users_all|subelements('pubkeys')}}"
   when: item.pubkeys is defined
