@@ -56,10 +56,11 @@
     ssh_key_comment: "{{item.name}} on {{ansible_hostname}}"
   loop: "{{basic_list_users_all}}"
 
-- name: copy public keys to users
-  authorized_key:
-    user: "{{item.name}}"
-    state: present
-    key: "{{lookup('file',item.pubkeys)}}"
-  loop: "{{[] if item.pubkeys is not defined or basic_list_users_all|subelements('pubkeys')}}"
-  when: item.pubkeys is defined
+- name: Check users that have pubkeys
+  include_tasks: ssh_keys.yml
+  loop: "{{basic_list_users_all}}"
+  loop_control:
+    loop_var: basic_loop_user
+    label: "{{basic_loop_user.name}}}}"
+  when: basic_loop_user.pubkeys is defined
+  

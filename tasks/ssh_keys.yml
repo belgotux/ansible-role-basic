@@ -1,0 +1,8 @@
+- name: "Copy public keys to users {{basic_loop_user.name}}"
+  authorized_key:
+    user: "{{basic_loop_user.name}}"
+    state: present
+    key: "{{lookup('file',item)}}"
+  loop: "{{basic_loop_user.pubkeys}}"
+  loop_control:
+    label: "{{basic_loop_user.name}} - {{item}}"
