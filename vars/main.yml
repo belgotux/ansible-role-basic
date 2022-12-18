@@ -35,8 +35,8 @@
 #   - /usr/local/bin
 
 # List of scripts common to servers
-# custom_scripts_common:
+# basic_custom_scripts_common:
 #   - /mnt/c/users/....
 # List of local scripts for a specific server
-# custom_scripts_local:
+# basic_custom_scripts_local:
 #   - /mnt/c/users/....

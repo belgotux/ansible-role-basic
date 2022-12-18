@@ -28,7 +28,6 @@
   tags: [configure]
 - import_tasks: configure-custom-scripts.yml
   tags: [configure]
-  when: staff_directories is defined and custom_scripts_common is defined
 - import_tasks: unattended-upgrades.yml
   become: true
   tags: [configure]

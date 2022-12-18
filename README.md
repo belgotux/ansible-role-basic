@@ -42,9 +42,11 @@ Role Variables
 
 ### optional
 - `auto_upgrade` Configure inattended-upgrades (default false)
+- `basic_packages_default` List of common packages to installed
+- `basic_packages_extra` List of others packages for specific group or hosts
 - `staff_directories` list of directory that can be modified by staff group
-- `custom_scripts_common` list of local scripts to put to /usr/local/bin (to use in groups)
-- `custom_scripts_local` list of additionnal scripts to put to /usr/local/bin (to use in hosts)
+- `basic_custom_scripts_common` list of local scripts to put to /usr/local/bin (to use in groups)
+- `basic_custom_scripts_local` list of additionnal scripts to put to /usr/local/bin (to use in hosts)
 
 Example Playbook
 ----------------
