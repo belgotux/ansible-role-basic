@@ -40,20 +40,21 @@
 - name: create users 
   user:
     name: "{{item.name}}"
-    group: "{{omit if item.primarygroup is not defined or item.primarygroup}}"
-    groups: "{{omit if item.groups is not defined or item.groups}}"
+    group: "{{item.primarygroup|default(omit)}}"
+    groups: "{{item.groups|default(omit)}}"
     state: present
     expires: -1
     home: "{{item.home|default(('/home/'+ item.name))}}"
     shell: "{{item.shell|default('/bin/bash')}}"
     create_home: "{{item.create_home|default(true)}}"
     system: "{{item.system|default(false)}}"
-    append: "{{omit if item.groups is not defined or true}}"
-    password: "{{omit if item.passwd is not defined or item.passwd}}"
+    append: "{{item.append|default(true)}}"
+    password: "{{item.passwd|default(omit)}}"
     generate_ssh_key: "{{item.generate_ssh_key|default(false)}}"
     ssh_key_type: rsa
     ssh_key_bits: 4096
     ssh_key_comment: "{{item.name}} on {{ansible_hostname}}"
+    update_password: always
   loop: "{{basic_list_users_all}}"
 
 - name: Check users that have pubkeys
