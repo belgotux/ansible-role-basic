@@ -19,3 +19,11 @@
     regexp: "^PermitRootLogin"
     line: "PermitRootLogin prohibit-password"
   notify: restart sshd
+
+- name: sudo session timeout
+  copy:
+    dest: /etc/sudoers.d/custom_defaults
+    validate: "visudo -cf %s"
+    mode: 0440
+    content: |
+      Defaults timestamp_timeout={{basic_sudo_timeout}}

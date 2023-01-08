@@ -61,3 +61,5 @@ basic_packages_bm:
 - iotop
 - wakeonlan
 - powertop
+
+basic_sudo_timeout: 600 #in minutes
