@@ -50,3 +50,13 @@
 #       SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="1c:bf:ce:2f:c4:10", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL=="eth*", NAME="usb1"
 #       # interface with MAC address "1c:bf:ce:2f:c5:e0" will be assigned "usb2"
 #       SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="1c:bf:ce:2f:c5:10", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL=="eth*", NAME="usb2"
+
+# systemd script example
+# basic_custom_systemd_common:
+#   - name: xxx
+#     src: "road65.service"
+#     dest: road65.service
+# basic_custom_systemd_local:
+#   - name: 3dprinter Longer
+#     src: "{{custom_script_dir}}/systemd/octoprint_connect@.service"
+#     dest: octoprint_connect@.service

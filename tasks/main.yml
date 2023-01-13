@@ -31,6 +31,9 @@
 - import_tasks: configure-udev.yml
   become: true
   tags: [configure]
+- import_tasks: configure-custom-systemd.yml
+  become: true
+  tags: [configure]
 - import_tasks: unattended-upgrades.yml
   become: true
   tags: [configure]

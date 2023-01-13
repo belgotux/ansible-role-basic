@@ -8,3 +8,7 @@
   delay: 3
   register: result
   until: result.rc == 0
+
+- name: daemon_reload
+  systemd:
+    daemon_reload: yes

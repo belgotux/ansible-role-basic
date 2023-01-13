@@ -1,0 +1,10 @@
+---
+- name: Add systemd config
+  copy:
+    src: "{{ item.src }}"
+    dest: "/etc/systemd/system/{{ item.dest }}"
+  loop: "{{ basic_custom_systemd_all if basic_custom_systemd_all is defined }}"
+  loop_control:
+    label: "{{ item.name }}"
+  notify: daemon_reload
+    

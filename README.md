@@ -47,6 +47,8 @@ Role Variables
 - `staff_directories` list of directory that can be modified by staff group
 - `basic_custom_scripts_common` list of local scripts to put to /usr/local/bin (to use in groups)
 - `basic_custom_scripts_local` list of additionnal scripts to put to /usr/local/bin (to use in hosts)
+- `basic_udev_rules` list of `[name,dest,value]` to put content into file in `/etc/udev/rules.d`
+- `basic_custom_systemd_common` and `basic_custom_systemd_local` list of `[name,dest,src]` to put file into directory `/etc/systemd/system`
 
 Example Playbook
 ----------------
