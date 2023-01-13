@@ -40,3 +40,13 @@
 # List of local scripts for a specific server
 # basic_custom_scripts_local:
 #   - /mnt/c/users/....
+
+# udev rule example for network adapter
+# basic_udev_rules:
+#   - name: usb_adapter_2.5G
+#     file: 70-persistent-net
+#     value: |
+#       # interface with MAC address "1c:bf:ce:2f:c4:20" will be assigned "usb1"
+#       SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="1c:bf:ce:2f:c4:10", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL=="eth*", NAME="usb1"
+#       # interface with MAC address "1c:bf:ce:2f:c5:e0" will be assigned "usb2"
+#       SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="1c:bf:ce:2f:c5:10", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL=="eth*", NAME="usb2"

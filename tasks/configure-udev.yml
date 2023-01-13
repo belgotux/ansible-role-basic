@@ -1,0 +1,9 @@
+---
+- name: Add udev files
+  copy:
+    content: "{{ item.value }}"
+    dest: "/etc/udev/rules.d/{{ item.file }}.rules"
+  loop: "{{ basic_udev_rules if basic_udev_rules is defined }}"
+  loop_control:
+    label: "{{ item.name }}"
+    
