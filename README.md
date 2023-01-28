@@ -48,7 +48,7 @@ Role Variables
 - `basic_custom_scripts_common` list of local scripts to put to /usr/local/bin (to use in groups)
 - `basic_custom_scripts_local` list of additionnal scripts to put to /usr/local/bin (to use in hosts)
 - `basic_udev_rules` list of `[name,dest,value]` to put content into file in `/etc/udev/rules.d`
-- `basic_custom_systemd_common` and `basic_custom_systemd_local` list of `[name,dest,src]` to put file into directory `/etc/systemd/system`
+- `basic_custom_systemd_common` and `basic_custom_systemd_local` list of `[name,type,dest,src|value]` to put file into directory `/etc/systemd/{{type}}`
 
 Example Playbook
 ----------------

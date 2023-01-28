@@ -54,9 +54,19 @@
 # systemd script example
 # basic_custom_systemd_common:
 #   - name: xxx
+#     type: system
 #     src: "road65.service"
 #     dest: road65.service
 # basic_custom_systemd_local:
 #   - name: 3dprinter Longer
+#     type: system
 #     src: "{{custom_script_dir}}/systemd/octoprint_connect@.service"
 #     dest: octoprint_connect@.service
+#   - name: USB adapter 2.5G
+#     value: |
+#       [Match]
+#       MACAddress=1c:bf:ce:2f:c7:21
+#       [Link]
+#       Name=usb25
+#     type: network
+#     dest: 10-persistent-net.link

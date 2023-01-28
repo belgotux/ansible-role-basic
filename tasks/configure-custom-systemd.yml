@@ -2,9 +2,19 @@
 - name: Add systemd config
   copy:
     src: "{{ item.src }}"
-    dest: "/etc/systemd/system/{{ item.dest }}"
+    dest: "/etc/systemd/{{ item.type }}/{{ item.dest }}"
+  when: item.src is defined
   loop: "{{ basic_custom_systemd_all if basic_custom_systemd_all is defined }}"
   loop_control:
     label: "{{ item.name }}"
   notify: daemon_reload
     
+- name: Add systemd config
+  copy:
+    content: "{{ item.value }}"
+    dest: "/etc/systemd/{{ item.type }}/{{ item.dest }}"
+  when: item.value is defined
+  loop: "{{ basic_custom_systemd_all if basic_custom_systemd_all is defined }}"
+  loop_control:
+    label: "{{ item.name }}"
+  notify: daemon_reload

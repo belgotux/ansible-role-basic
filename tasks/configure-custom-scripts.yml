@@ -26,6 +26,20 @@
   loop: "{{basic_custom_scripts_common}}"
   when: basic_custom_scripts_common is defined
   
-
+- name: merge common and local etc
+  set_fact:
+    basic_custom_etc_common: "{{basic_custom_etc_common + basic_custom_etc_local}}"
+  when: basic_custom_etc_common is defined and basic_custom_etc_local is defined
+- name: get only local etc
+  set_fact:
+    basic_custom_etc_common: "{{basic_custom_etc_local}}"
+  when: basic_custom_etc_common is not defined and basic_custom_etc_local is defined
+- name: Install local etc config files
+  copy:
+    src: "{{item}}"
+    dest: "/usr/local/etc/{{item | basename}}"
+    mode: 0660
+  loop: "{{basic_custom_etc_common}}"
+  when: basic_custom_etc_common is defined
 
   #TODO idem src git?
