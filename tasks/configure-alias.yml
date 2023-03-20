@@ -58,7 +58,7 @@
   loop: "{{allpaths}}"
   loop_control:
     index_var: id
-  when: bash_alias_shared is defined
+  when: bash_alias_shared
   become: true
 
 - name: Install Aliases Files basic.aliases
