@@ -42,4 +42,10 @@
   loop: "{{basic_custom_etc_common}}"
   when: basic_custom_etc_common is defined
 
+- name: copy custom cron files based on group name
+  include_tasks: configure-custom-cron.yml
+  loop: "{{group_names}}"
+  loop_control:
+    loop_var: current_group
+
   #TODO idem src git?

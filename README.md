@@ -50,6 +50,10 @@ Role Variables
 - `basic_udev_rules` list of `[name,dest,value]` to put content into file in `/etc/udev/rules.d`
 - `basic_custom_systemd_common` and `basic_custom_systemd_local` list of `[name,type,dest,src|value]` to put file into directory `/etc/systemd/{{type}}`
 
+Copy cron
+---------
+You can copy cron files into /etc/cron.d/ based on group name. Just put files into directory `files/cron/YOUR_GROUP/` to copy them.
+
 Example Playbook
 ----------------
 ```yml

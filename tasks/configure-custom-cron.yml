@@ -1,0 +1,6 @@
+- name: copy custom cron files for {{current_group}} if exist
+  copy:
+    src: "{{item}}"
+    dest: "/etc/cron.d/{{item|basename}}"
+    mode: 0644
+  loop: "{{lookup('fileglob','cron/{{current_group}}/*',wantlist=True,errors='ignore')}}"
