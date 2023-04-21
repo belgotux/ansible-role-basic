@@ -9,7 +9,7 @@
 - name: generate root SSH key "{{ssh_key_filename}}"
   openssh_keypair:
     path: "/root/.ssh/{{ssh_key_filename}}"
-    type: rsa
+    type: ed25519
     size: 4096
     state: present
     force: no

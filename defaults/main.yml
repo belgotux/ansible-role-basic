@@ -2,7 +2,7 @@
 # bare metal server
 bm: no
 # SSH key file path to generate for root
-ssh_key_filename: id_rsa
+ssh_key_filename: id_ed25519
 
 # firstusershell: /bin/bash
 # firstuserpasswd: !
