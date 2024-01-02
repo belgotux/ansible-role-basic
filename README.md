@@ -11,7 +11,7 @@ Requirements
 
 The playbooks [`playbook-init-server.yml`](playbook-init-server.yml) can be use first to init a new server with public keys and install sudo for Debian. Only need to execute once : 
 ```
-ansible-playbook -i inventories/prod roles/basic/playbook-init-server.yml -e 'myhost=node9 user=devops become_meth=sudo' -kK
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventories/prod roles/basic/playbook-init-server.yml -e 'mykey=~/.ssh/id_ecdsa.pub myhost=node9 user=pi become_meth=su' -kK
 ``` 
 
 - Copy [`basic.aliases.example`](files/basic.aliases.example) to `basic.aliases` to add your aliaseses
@@ -56,15 +56,36 @@ You can copy cron files into /etc/cron.d/ based on group name. Just put files in
 
 Example Playbook
 ----------------
+
+### Playboot to to initiate a fresh raspberry pi `init-new-host.yml` : 
 ```yml
-- hosts: [homeservers,vps]
-  remote_user: root
+- hosts: all
   roles:
     - name: basic
       vars: 
         basic_list_users:
           - name: belgotux
-            primarygroup: belgotux
+            groups: sudo,users,staff,adm
+            passwd: $6$xxxx
+            pubkeys:
+              - xxx.pub
+              - yyy.pub
+        bash_alias_shared: yes
+```
+Usage : 
+```
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventories/prod init-new-host.yml -u pi --limit octoprint -kK
+```
+
+
+### Example in use of a large playbook with other roles
+```yml
+- hosts: [homeservers,vps]
+  roles:
+    - name: basic
+      vars: 
+        basic_list_users:
+          - name: belgotux
             groups: sudo,users,staff,adm
             shell: "/bin/zsh"
             passwd: $6$xxxx
@@ -72,6 +93,12 @@ Example Playbook
               - xxx.pub
               - yyy.pub
         bash_alias_shared: yes
+      tags: basic
+    - role: viasite-ansible.zsh
+      tags: zsh
+      become: true
+    - role: postfix-client
+      tags: postfix
 ```
 
 License
