@@ -69,3 +69,4 @@ basic_custom_systemd_local: []
 basic_custom_systemd_all: '{{ basic_custom_systemd_common + basic_custom_systemd_local }}'
 
 basic_sudo_timeout: 600 #in minutes
+basic_sudo_passwordless: false
