@@ -4,9 +4,6 @@
     name: sshd
     state: reloaded
     daemon_reload: no
-  delay: 3
-  register: result
-  until: result.rc == 0
 
 - name: daemon_reload
   systemd:
