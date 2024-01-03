@@ -19,6 +19,7 @@
     regexp: "^PermitRootLogin"
     line: "PermitRootLogin prohibit-password"
   notify: reload sshd
+  when: kernel.rc  # avoid WSL2
 
 - name: sudo session timeout
   copy:

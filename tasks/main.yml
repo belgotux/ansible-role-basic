@@ -1,4 +1,9 @@
 ---
+- name: check natif kernel # avoid WSL
+  shell: uname -r | grep microsoft
+  register: kernel
+  changed_when: false
+  failed_when: false
 - import_tasks: install-basic.yml
   become: true
   tags: [install]
