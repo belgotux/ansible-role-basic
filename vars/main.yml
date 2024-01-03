@@ -11,13 +11,21 @@
 
 # basic_list_users:
 #   - name: belgotux
-#     primarygroup: belgotux
 #     groups: sudo,users,staff,adm
 #     shell: "/bin/zsh"
 #     passwd: $6$xxxx
 #     pubkeys:
 #       - xxx.pub
 #       - yyy.pub
+
+
+# basic_users_and_path_alias_list:
+#   - user: root
+#     path: /root
+#   - user: root
+#     path: /etc/skel
+#   - user: pi
+#     path: /home/pi
 
 # Installed alias in /usr/share (only with root user of become) (optional)
 # bash_alias_dir_share: /usr/share

@@ -92,7 +92,17 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventories/prod init-new-ho
             pubkeys:
               - xxx.pub
               - yyy.pub
+        basic_sudo_passwordless: yes
         bash_alias_shared: yes
+        basic_users_and_path_alias_list:
+          - user: root
+            path: /root
+          - user: root
+            path: /etc/skel
+          - user: pi
+            path: /home/pi
+          - user: belgotux
+            path: /home/belgotux
       tags: basic
     - role: viasite-ansible.zsh
       tags: zsh

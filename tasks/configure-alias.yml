@@ -1,36 +1,48 @@
 ---
 # Aliases
-- name: Get Ubuntu/Debian users's home path
-  shell: "egrep '^.*:.*:[1-9][0-9]{3,4}:.*:.*:.*:.*(bash|zsh)$' /etc/passwd | awk -F: '{print $6}'"
-  register: paths
-  when: ansible_os_family == 'Debian' and bash_alias_shared
-  changed_when: false
-  become: true
-# - debug: var=paths
 
-- name: Get Ubuntu/Debian users
-  shell: "egrep '^.*:.*:[1-9][0-9]{3,4}:.*:.*:.*:.*(bash|zsh)$' /etc/passwd | awk -F: '{print $1}'"
-  register: basic_alias_custom_users
-  when: ansible_os_family == 'Debian' and bash_alias_shared and paths is defined and paths.stdout != ""
-  changed_when: false
-- name: Format user list
-  set_fact:
-    basic_all_users: "{{['root','root'] + basic_alias_custom_users.stdout.splitlines()| list}}"
-  when: ansible_os_family == 'Debian' and bash_alias_shared and paths is defined and paths.stdout != ""
+- name: Get users and path from define list
+  when: basic_users_and_path_alias_list is defined
+  block: 
+    - name: Get users from list
+      set_fact:
+        basic_all_users: "{{ basic_users_and_path_alias_list | map(attribute='user') | list }}"
+    - name: Get path from list
+      set_fact:
+        allpaths: "{{ basic_users_and_path_alias_list | map(attribute='path') | list }}"
+        
+- name: Find users and path on the system
+  when: basic_users_and_path_alias_list is not defined
+  block:
+    - name: Get Ubuntu/Debian users's home path
+      shell: "egrep '^.*:.*:[1-9][0-9]{3,4}:.*:.*:.*:.*(bash|zsh)$' /etc/passwd | awk -F: '{print $6}'"
+      register: paths
+      when: ansible_os_family == 'Debian' and bash_alias_shared
+      changed_when: false
+      become: true
+    - name: Get Ubuntu/Debian users
+      shell: "egrep '^.*:.*:[1-9][0-9]{3,4}:.*:.*:.*:.*(bash|zsh)$' /etc/passwd | awk -F: '{print $1}'"
+      register: basic_alias_custom_users
+      when: ansible_os_family == 'Debian' and bash_alias_shared and paths is defined and paths.stdout != ""
+      changed_when: false
+    - name: Format user list
+      set_fact:
+        basic_all_users: "{{['root','root'] + basic_alias_custom_users.stdout.splitlines()| list}}"
+      when: ansible_os_family == 'Debian' and bash_alias_shared and paths is defined and paths.stdout != ""
 
-- name: Merge the users path and root/skel to list
-  set_fact:
-    allpaths: "{{ ['/root','/etc/skel'] + paths.stdout.splitlines()| list }}"
-  when: bash_alias_shared and paths is defined and paths.stdout != ""
-- name: Use only root/skel for the list (no users found)
-  set_fact:
-    allpaths: "{{ ['/root','/etc/skel']}}"
-  when: bash_alias_shared and paths is defined and paths.stdout == ""
-- name: Take only user directory {{ lookup('env','HOME') }}
-  set_fact:
-    allpaths: "{{ [lookup('env','HOME')] }}"
-  when: not bash_alias_shared
-# - debug: var=allpaths
+    - name: Merge the users path and root/skel to list
+      set_fact:
+        allpaths: "{{ ['/root','/etc/skel'] + paths.stdout.splitlines()| list }}"
+      when: bash_alias_shared and paths is defined and paths.stdout != ""
+    - name: Use only root/skel for the list (no users found)
+      set_fact:
+        allpaths: "{{ ['/root','/etc/skel']}}"
+      when: bash_alias_shared and paths is defined and paths.stdout == ""
+    - name: Take only user directory {{ lookup('env','HOME') }}
+      set_fact:
+        allpaths: "{{ [lookup('env','HOME')] }}"
+      when: not bash_alias_shared
+    # - debug: var=allpaths
 
 - name: Install Aliases in {{allpaths | join(',')}}
   template:
