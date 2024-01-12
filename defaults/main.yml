@@ -41,6 +41,7 @@ basic_packages_default:
   - rsync
   - less
   - git
+  - systemd-timesyncd
 
 basic_packages_extra: []
 
