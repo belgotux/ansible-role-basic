@@ -62,6 +62,7 @@ basic_packages_bm:
 - iotop
 - wakeonlan
 - powertop
+- smartmontools
 
 
 basic_udev_rules: []
