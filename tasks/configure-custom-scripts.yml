@@ -23,6 +23,8 @@
     src: "{{item}}"
     dest: "/usr/local/bin/{{item | basename}}"
     mode: 0775
+    group: staff
+    owner: root
   loop: "{{basic_custom_scripts_common}}"
   when: basic_custom_scripts_common is defined
   
