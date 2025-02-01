@@ -3,7 +3,7 @@
   systemd:
     name: sshd
     state: reloaded
-    daemon_reload: no
+    daemon_reload: false
 
 - name: daemon_reload
   systemd:

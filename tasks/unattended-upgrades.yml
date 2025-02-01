@@ -11,7 +11,7 @@
     path: /etc/apt/apt.conf.d/50unattended-upgrades
     marker : "// {mark} ANSIBLE block"
     insertafter: EOF
-    backup: no
+    backup: false
     block: |
       Unattended-Upgrade::Mail "root";
       Unattended-Upgrade::MailOnlyOnError "true";

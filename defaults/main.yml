@@ -1,6 +1,6 @@
 ---
 # bare metal server
-bm: no
+bm: false
 # SSH key file path to generate for root
 ssh_key_filename: id_ed25519
 
@@ -9,7 +9,7 @@ ssh_key_filename: id_ed25519
 
 # Installed alias in /usr/share (only with root remote_user)
 bash_alias_dir_share: /usr/share
-basic_shared: no
+basic_shared: false
 vim_config_shared: "{{basic_shared}}"
 bash_alias_shared: "{{basic_shared}}"
 bash_alias_dir: "{% if bash_alias_shared %}{{bash_alias_dir_share}}{% else %}{{ lookup('env','HOME') }}{% endif %}"

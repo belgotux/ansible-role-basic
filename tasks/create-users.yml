@@ -13,7 +13,7 @@
 #     home: "{{firstuserdir}}"
 #     shell: "{{firstusershell}}"
 #     create_home: true
-#     system: no
+#     system: false
 #     append: true
 #     password: "{{firstuserpasswd}}"
 #     generate_ssh_key: true

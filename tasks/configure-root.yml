@@ -12,7 +12,7 @@
     type: ed25519
     size: 4096
     state: present
-    force: no
+    force: false
 - name: Adjust prohibit-password root setting in /etc/ssh/sshd_config
   lineinfile:
     dest: /etc/ssh/sshd_config
