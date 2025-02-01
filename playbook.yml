@@ -18,5 +18,5 @@
         # firstusergroup: belgotux
         # firstusershell: "/bin/zsh"
         # firstuserdir: "{{('/home/'+ firstuser)}}"
-        bash_alias_shared: yes
-        vim_config_shared: yes
+        bash_alias_shared: true
+        vim_config_shared: true

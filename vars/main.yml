@@ -1,6 +1,6 @@
 ---
 # Install bare metal tools (optional)
-# bm: yes
+# bm: true
 
 # SSH key generated for root (optional)
 # ssh_key_filename: id_rsa
@@ -29,14 +29,14 @@
 
 # Installed alias in /usr/share (only with root user of become) (optional)
 # bash_alias_dir_share: /usr/share
-# bash_alias_shared: yes
+# bash_alias_shared: true
 
 # Install custom vim in "shared mode" into /etc/vim/vimrc.local or local user
-# vim_config_shared: yes
+# vim_config_shared: true
 # timezone: Europe/Brussels
 
 # Configure inattended-upgrades
-# auto_upgrade: yes
+# basic_auto_upgrade: true
 
 # group staff authorized to put files
 # staff_directories: 

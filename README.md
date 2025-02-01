@@ -41,7 +41,7 @@ Role Variables
 - `bash_alias_dir_share` (default /usr/share)
 
 ### optional
-- `auto_upgrade` Configure inattended-upgrades (default false)
+- `basic_auto_upgrade` Configure inattended-upgrades (default false)
 - `basic_packages_default` List of common packages to installed
 - `basic_packages_extra` List of others packages for specific group or hosts
 - `staff_directories` list of directory that can be modified by staff group
@@ -70,7 +70,7 @@ Example Playbook
             pubkeys:
               - xxx.pub
               - yyy.pub
-        bash_alias_shared: yes
+        bash_alias_shared: true
 ```
 Usage : 
 ```
@@ -92,8 +92,8 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventories/prod init-new-ho
             pubkeys:
               - xxx.pub
               - yyy.pub
-        basic_sudo_passwordless: yes
-        bash_alias_shared: yes
+        basic_sudo_passwordless: true
+        bash_alias_shared: true
         basic_users_and_path_alias_list:
           - user: root
             path: /root

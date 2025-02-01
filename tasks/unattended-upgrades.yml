@@ -3,8 +3,8 @@
     pkg:
       - unattended-upgrades
     state: latest
-    update_cache: yes
-  when: auto_upgrade is defined and auto_upgrade
+    update_cache: true
+  when: basic_auto_upgrade is defined and basic_auto_upgrade
 
 - name: Unattended autoclean and reboot
   blockinfile:
@@ -16,4 +16,6 @@
       Unattended-Upgrade::Mail "root";
       Unattended-Upgrade::MailOnlyOnError "true";
       Unattended-Upgrade::Remove-Unused-Dependencies "true";
-  when: auto_upgrade is defined and auto_upgrade
+  when: basic_auto_upgrade is defined and basic_auto_upgrade and ansible_distribution == "Ubuntu" and ansible_distribution_major_version >= "20"
+
+#TODO debian add file FAILED! => {"changed": false, "msg": "Path /etc/apt/apt.conf.d/50unattended-upgrades does not exist !", "rc": 257}

@@ -12,11 +12,11 @@
 #     expires: -1
 #     home: "{{firstuserdir}}"
 #     shell: "{{firstusershell}}"
-#     create_home: yes
+#     create_home: true
 #     system: no
-#     append: yes
+#     append: true
 #     password: "{{firstuserpasswd}}"
-#     generate_ssh_key: yes
+#     generate_ssh_key: true
 #     ssh_key_type: rsa
 #     ssh_key_bits: 4096
 #     ssh_key_comment: "{{firstuser}} on {{ansible_hostname}}"
