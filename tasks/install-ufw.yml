@@ -1,0 +1,16 @@
+- name: Install UFW
+  apt:
+    pkg:
+      - ufw
+    state: latest
+
+- name: allow SSH
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: enable and deny IN by default
+  ufw:
+    state: enabled
+    policy: deny
+    direction: in

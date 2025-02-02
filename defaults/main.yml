@@ -64,6 +64,7 @@ basic_packages_bm:
 - powertop
 - smartmontools
 
+basic_ufw: false
 
 basic_udev_rules: []
 basic_custom_systemd_common: []
