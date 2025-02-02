@@ -1,7 +1,7 @@
 - name: set timezone to {{timezone}}
   timezone:
     name: "{{timezone}}"
-  when: kernel.rc  # avoid WSL2
+  when: kernel.rc is defined and kernel.rc  # avoid WSL2
 
 # NOT NEED with plugin timezone
 # - name: linklocaltime
@@ -14,7 +14,8 @@
   command: timedatectl show --property=NTP --value
   register: ntp_status
   changed_when: false
-  when: kernel.rc  # avoid WSL2
-- name: enable ntp
-  command: timedatectl set-ntp true
-  when: kernel.rc and ntp_status.stdout != 'yes'
+  when: kernel.rc is defined and kernel.rc  # avoid WSL2
+# TODO COND IF systemd-timesyncd IS INSTALLED
+# - name: enable ntp
+#   command: timedatectl set-ntp true
+#   when: kernel.rc is defined and kernel.rc and ntp_status.stdout != 'yes'

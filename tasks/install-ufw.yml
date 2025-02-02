@@ -13,4 +13,4 @@
   ufw:
     state: enabled
     policy: deny
-    direction: in
+    direction: incoming
