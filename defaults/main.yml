@@ -12,7 +12,7 @@ bash_alias_dir_share: /usr/share
 basic_shared: false
 vim_config_shared: "{{basic_shared}}"
 bash_alias_shared: "{{basic_shared}}"
-bash_alias_dir: "{% if bash_alias_shared %}{{bash_alias_dir_share}}{% else %}{{ lookup('env','HOME') }}{% endif %}"
+bash_alias_dir: "{% if bash_alias_shared %}{{bash_alias_dir_share}}{% else %}{{ ansible_env.HOME }}{% endif %}"
 timezone: "Europe/Brussels"
 
 basic_packages_default: 

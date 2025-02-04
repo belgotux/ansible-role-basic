@@ -11,7 +11,7 @@ Requirements
 
 The playbooks [`playbook-init-server.yml`](playbook-init-server.yml) can be use first to init a new server with public keys and install sudo for Debian. Only need to execute once : 
 ```
-ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventories/prod roles/basic/playbook-init-server.yml -e 'mykey=~/.ssh/id_ecdsa.pub myhost=node9 user=pi become_meth=su' -kK
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventories/prod roles/basic/playbook-init-server.yml -e 'mykey=~/.ssh/id_ed25519.pub myhost=node9 become_meth=su' --become-method=su -kK
 ``` 
 
 - Copy [`basic.aliases.example`](files/basic.aliases.example) to `basic.aliases` to add your aliaseses
